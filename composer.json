@@ -10,7 +10,12 @@
     "homepage": "https://github.com/FuriosoJack/KaseyaSDKSOAP",
     "autoload": {
         "psr-4": {
-            "FuriosoJack\\KaseyaSDK-SOAP\\": "src"
+            "FuriosoJack\\KaseyaSDKSOAP\\": "src"
+        }
+    },
+    "autoload-dev":{
+        "psr-4": {
+            "FuriosoJack\\KaseyaSDKSOAP\\Tests\\": "tests"
         }
     },
     "minimum-stability": "dev",
