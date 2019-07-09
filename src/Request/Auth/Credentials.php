@@ -25,9 +25,9 @@ class Credentials
      * Devuelve el password encriptado en sha256
      * @return string
      */
-    public function getEncriptPassword()
+    public function getPassword()
     {
-        return hash("sha256",$this->password);
+        return $this->password;
     }
 
     /**
@@ -38,4 +38,5 @@ class Credentials
     {
         return $this->username;
     }
+
 }

@@ -34,7 +34,6 @@
       <path value="$PROJECT_DIR$/vendor/zendframework/zend-json" />
       <path value="$PROJECT_DIR$/vendor/cilex/console-service-provider" />
       <path value="$PROJECT_DIR$/vendor/twig/twig" />
-      <path value="$PROJECT_DIR$/vendor/econea/nusoap" />
       <path value="$PROJECT_DIR$/vendor/cilex/cilex" />
       <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
       <path value="$PROJECT_DIR$/vendor/erusev/parsedown" />
@@ -78,6 +77,8 @@
       <path value="$PROJECT_DIR$/vendor/phar-io/manifest" />
       <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
       <path value="$PROJECT_DIR$/vendor/phpspec/prophecy" />
+      <path value="$PROJECT_DIR$/vendor/codwelt/helpersman" />
+      <path value="$PROJECT_DIR$/vendor/vlucas/phpdotenv" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7" />

@@ -22,7 +22,8 @@
     "prefer-stable" : true,
     "require": {
         "php" : ">=7.0",
-        "econea/nusoap": "~0.9.6"
+        "codwelt/helpersman": "^v2.0",
+        "vlucas/phpdotenv": "^2.5"
     },
     "require-dev":{
         "phpunit/phpunit": "^7",

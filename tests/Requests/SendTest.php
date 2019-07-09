@@ -1,5 +1,6 @@
 <?php
 namespace FuriosoJack\KaseyaSDKSOAP\Tests\Requests;
+use FuriosoJack\KaseyaSDKSOAP\Request\DOM\AuthDOM;
 use FuriosoJack\KaseyaSDKSOAP\Request\Request;
 use FuriosoJack\KaseyaSDKSOAP\Tests\TestCase;
 
@@ -10,17 +11,15 @@ use FuriosoJack\KaseyaSDKSOAP\Tests\TestCase;
 class SendTest extends TestCase
 {
 
-    public function tetsSendAuth()
+    /**
+     * Hace el test para servidor sassas
+     */
+    public function testSendAuth()
     {
-
-        $url = "https://saas14.pccor.net/vsaWS/KaseyaWS.asmx";
-
+        $url = getenv('URL_SERVER');
         $request = new Request($url);
-        $request->setHeaders('SOAPAction: "KaseyaWS/Authenticate"');
-
-        $request->send("Authenticate",null);
-
-
+        $response = $request->send(null);
+        $this->assertIsInt(200,$response->getStatusCode());
 
     }
 
