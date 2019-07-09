@@ -89,5 +89,11 @@ class AuthDOM
         return $this->domDocument;
     }
 
+    public function __toString()
+    {
+        $xmlString = $this->domDocument->saveXML();
+        return $xmlString;
+    }
+
 
 }

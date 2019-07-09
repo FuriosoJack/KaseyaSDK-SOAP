@@ -27,8 +27,7 @@ class Session
 
 
 
-
-    private function auth()
+    public function auth()
     {
         $request = new Request($this->urlServer);
 
@@ -43,7 +42,9 @@ class Session
         $domAuth->setCoredPassword($coredPassword);
         $domAuth->setRandomKey($randomKey);
         $domAuth->setUsername($this->credentials->getUsername());
-
+        
+        $response =  $request->send($domAuth);
+        var_dump($response);
 
 
 
