@@ -12,22 +12,41 @@ class Response
 {
 
 
+    /**
+     *  Contenido de la respuesta
+     * @var String
+     */
     private $bodyResponse;
 
+    /**
+     * codigo de estado de la peticion
+     * @var
+     */
     private $statusCode;
 
+    /**
+     * Response constructor.
+     * @param $curlClient
+     * @param $bodyResponseRaw
+     */
     public function __construct($curlClient, $bodyResponseRaw)
     {
         $this->extractData($curlClient);
         $this->bodyResponse = $bodyResponseRaw;
     }
 
+    /**
+     * @param $curlClient
+     */
     public function extractData($curlClient)
     {
         $this->statusCode = curl_getinfo($curlClient,CURLINFO_HTTP_CODE);
         curl_close($curlClient);
     }
 
+    /**
+     * @return mixed
+     */
     public function getStatusCode()
     {
         return $this->statusCode;
@@ -46,6 +65,11 @@ class Response
         return $bodyXML;
     }
 
+    /**
+     * Obtiene el contenido de la peticion
+     * @param bool $string
+     * @return \DOMDocument|String
+     */
     public function getBody($string = true)
     {
         if($string){

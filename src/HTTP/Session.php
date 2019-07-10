@@ -13,12 +13,26 @@ use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Response\AuthResponseDOM;
  */
 class Session
 {
-
+    /**
+     * @var Credentials
+     */
     private $credentials;
+
+    /**
+     * @var
+     */
     private $urlServer;
 
+    /**
+     * @var
+     */
     private $authResponseDOM;
 
+    /**
+     * Session constructor.
+     * @param Credentials $credentials
+     * @param $urlServer
+     */
     public function __construct(Credentials $credentials,$urlServer)
     {
         $this->credentials = $credentials;
@@ -56,6 +70,9 @@ class Session
 
     }
 
+    /**
+     * @return AuthResponseDOM
+     */
     public function getAuthResponseDOM(): AuthResponseDOM
     {
         return $this->authResponseDOM;

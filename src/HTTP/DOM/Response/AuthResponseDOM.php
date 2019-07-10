@@ -11,16 +11,41 @@ namespace FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Response;
 class AuthResponseDOM
 {
 
+    /**
+     * @var \DOMDocument
+     */
     private $domDocument;
 
+    /**
+     * @var
+     */
     private $sessionID;
+
+    /**
+     * @var
+     */
     private $method;
+
+    /**
+     * @var
+     */
     private $transactionID;
+
+    /**
+     * @var
+     */
     private $errorMessage;
+
+    /**
+     * @var
+     */
     private $errorLocation;
 
 
-
+    /**
+     * AuthResponseDOM constructor.
+     * @param \DOMDocument $document
+     */
     public function __construct(\DOMDocument $document)
     {
         $this->domDocument = $document;

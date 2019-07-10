@@ -11,10 +11,20 @@ namespace FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request;
 class BodyRequestDOM
 {
 
+    /**
+     * @var \DOMDocument
+     */
     private $domDocumnet;
 
+    /**
+     * @var \DOMDocument
+     */
     private $elementBody;
 
+    /**
+     * BodyRequestDOM constructor.
+     * @param \DOMDocument $elementBody
+     */
     public function __construct(\DOMDocument $elementBody)
     {
         $this->domDocumnet = new \DOMDocument();
@@ -22,8 +32,9 @@ class BodyRequestDOM
     }
 
 
-
-
+    /**
+     * Se encarga de crear la estrucutra del DOM
+     */
     public function storeStructure()
     {
         $element = $this->domDocumnet->createElementNS("http://schemas.xmlsoap.org/soap/envelope/","soap:Envelope");
@@ -52,7 +63,9 @@ class BodyRequestDOM
 
     }
 
-
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->domDocumnet->saveXML();

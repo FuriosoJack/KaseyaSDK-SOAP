@@ -18,6 +18,7 @@ class Request
     private $clientCurl;
 
     /**
+     *
      * @var array
      */
     private $headers;
@@ -41,6 +42,7 @@ class Request
     }
 
     /**
+     * Establece la configuracion basica
      * @param $url
      */
     private function setConfigClient($url)
@@ -57,6 +59,7 @@ class Request
 
 
     /**
+     * Asigna el contenido de la peticion
      * @param $content
      */
     private function setContet($content)

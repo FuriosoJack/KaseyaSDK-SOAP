@@ -11,14 +11,35 @@ namespace FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request;
 class AuthRequestDOM
 {
 
+    /**
+     * @var \DOMDocument
+     */
     private $domDocument;
 
+    /**
+     * @var
+     */
     private $username;
+
+    /**
+     * @var
+     */
     private $coredPassword;
+
+    /**
+     * @var
+     */
     private $randomKey;
+
+    /**
+     * @var
+     */
     private $algorithm;
 
 
+    /**
+     * AuthRequestDOM constructor.
+     */
     public function __construct()
     {
         $this->domDocument = new \DOMDocument();
@@ -57,7 +78,9 @@ class AuthRequestDOM
         $this->algorithm = $algorithm;
     }
 
-
+    /**
+     * Se encarga de crea la estructura del DOM
+     */
     public function storeStructure()
     {
 
@@ -84,11 +107,17 @@ class AuthRequestDOM
     }
 
 
+    /**
+     * @return \DOMDocument
+     */
     public function getDocument():\DOMDocument
     {
         return $this->domDocument;
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         $element = $this->domDocument->firstChild;
