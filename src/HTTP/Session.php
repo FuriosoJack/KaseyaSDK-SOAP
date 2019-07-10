@@ -1,11 +1,9 @@
 <?php
-
-
-namespace FuriosoJack\KaseyaSDKSOAP\Request;
-use Codwelt\HelpersMan\Exception;
+namespace FuriosoJack\KaseyaSDKSOAP\HTTP;
 use Codwelt\HelpersMan\HelpersMan;
-use FuriosoJack\KaseyaSDKSOAP\Request\Auth\Credentials;
-use FuriosoJack\KaseyaSDKSOAP\Request\DOM\AuthDOM;
+use FuriosoJack\KaseyaSDKSOAP\HTTP\Auth\Credentials;
+use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\AuthRequestDOM;
+use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Response\AuthResponseDOM;
 
 
 /**
@@ -18,15 +16,19 @@ class Session
 
     private $credentials;
     private $urlServer;
-    private $session_open;
+
+    private $authResponseDOM;
 
     public function __construct(Credentials $credentials,$urlServer)
     {
         $this->credentials = $credentials;
         $this->urlServer =  $urlServer;
-        $this->session_open = false;
+
     }
 
+    /*
+     * Ejecuta la peticion para la autenticacion
+     */
     public function auth()
     {
         $request = new Request($this->urlServer);
@@ -38,7 +40,7 @@ class Session
         $coredPassword = hash('sha256', hash('sha256', $this->credentials->getPassword() . $this->credentials->getUsername()) . $randomKey);
 
         //Se crea el contenido de la peticion
-        $domAuth = new AuthDOM();
+        $domAuth = new AuthRequestDOM();
         $domAuth->setAlgorithm("SHA-256");
         $domAuth->setCoredPassword($coredPassword);
         $domAuth->setRandomKey($randomKey);
@@ -49,19 +51,15 @@ class Session
 
 
         if($response->getStatusCode() == 200){
-            $this->session_open = true;
+            $this->authResponseDOM = new AuthResponseDOM($response->getBody(false));
         }
 
-
     }
 
-
-    public function sessionOpen()
+    public function getAuthResponseDOM(): AuthResponseDOM
     {
-        return $this->session_open;
+        return $this->authResponseDOM;
     }
-
-
 
 
 

@@ -1,8 +1,8 @@
 <?php
 
 
-namespace FuriosoJack\KaseyaSDKSOAP\Request;
-use FuriosoJack\KaseyaSDKSOAP\Request\DOM\BodyDOM;
+namespace FuriosoJack\KaseyaSDKSOAP\HTTP;
+use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\BodyRequestDOM;
 
 /**
  * Clase que se encarga de hacer la peticion al servidor
@@ -93,7 +93,7 @@ class Request
      */
     public function send(\DOMDocument $content): Response
     {
-        $domBody = new BodyDOM($content);
+        $domBody = new BodyRequestDOM($content);
         $domBody->storeStructure();
         $this->setContet((string)$domBody);
         $responseRAW = curl_exec($this->clientCurl);

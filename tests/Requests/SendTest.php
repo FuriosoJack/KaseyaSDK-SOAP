@@ -1,9 +1,9 @@
 <?php
 namespace FuriosoJack\KaseyaSDKSOAP\Tests\Requests;
-use FuriosoJack\KaseyaSDKSOAP\Request\Auth\Credentials;
-use FuriosoJack\KaseyaSDKSOAP\Request\DOM\AuthDOM;
-use FuriosoJack\KaseyaSDKSOAP\Request\Request;
-use FuriosoJack\KaseyaSDKSOAP\Request\Session;
+use FuriosoJack\KaseyaSDKSOAP\HTTP\Auth\Credentials;
+use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\AuthRequestDOM;
+use FuriosoJack\KaseyaSDKSOAP\HTTP\Request;
+use FuriosoJack\KaseyaSDKSOAP\HTTP\Session;
 use FuriosoJack\KaseyaSDKSOAP\Tests\TestCase;
 
 /**
@@ -24,12 +24,15 @@ class SendTest extends TestCase
         $this->assertIsInt(200,$response->getStatusCode());
     }
 
+    /**
+     * Abre una session
+     */
     public function testSession()
     {
         $credential = new Credentials(getenv("USERNAME_SERVER"),getenv("PASSWORD_SERVER"));
         $session = new Session($credential,getenv('URL_SERVER'));
         $session->auth();
-        $this->assertTrue($session->sessionOpen());
+        $this->assertTrue($session->getAuthResponseDOM() != null);
     }
 
 }

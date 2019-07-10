@@ -1,7 +1,7 @@
 <?php
 
 
-namespace FuriosoJack\KaseyaSDKSOAP\Request\Auth;
+namespace FuriosoJack\KaseyaSDKSOAP\HTTP\Auth;
 
 /**
  * Class Credentials

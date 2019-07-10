@@ -3,8 +3,8 @@
 
 namespace FuriosoJack\KaseyaSDKSOAP\Tests\Requests;
 use Codwelt\HelpersMan\HelpersMan;
-use FuriosoJack\KaseyaSDKSOAP\Request\DOM\AuthDOM;
-use FuriosoJack\KaseyaSDKSOAP\Request\DOM\BodyDOM;
+use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\AuthRequestDOM;
+use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\BodyRequestDOM;
 use FuriosoJack\KaseyaSDKSOAP\Tests\TestCase;
 
 /**
@@ -23,7 +23,7 @@ class DomTest extends TestCase
         $coredPassword = hash('sha256', hash('sha256', getenv("PASSWORD_SERVER") . getenv("USERNAME_SERVER")) . $randomKey);
 
         //Se crea el contenido de la peticion
-        $domAuth = new AuthDOM();
+        $domAuth = new AuthRequestDOM();
         $domAuth->setAlgorithm("SHA-256");
         $domAuth->setCoredPassword($coredPassword);
         $domAuth->setRandomKey($randomKey);
@@ -47,14 +47,14 @@ class DomTest extends TestCase
         $coredPassword = hash('sha256', hash('sha256', getenv("PASSWORD_SERVER") . getenv("USERNAME_SERVER")) . $randomKey);
 
         //Se crea el contenido de la peticion
-        $domAuth = new AuthDOM();
+        $domAuth = new AuthRequestDOM();
         $domAuth->setAlgorithm("SHA-256");
         $domAuth->setCoredPassword($coredPassword);
         $domAuth->setRandomKey($randomKey);
         $domAuth->setUsername(getenv("USERNAME_SERVER"));
         $domAuth->storeStructure();
 
-        $domBody = new BodyDOM($domAuth->getDocument());
+        $domBody = new BodyRequestDOM($domAuth->getDocument());
         $domBody->storeStructure();
 
         $this->assertIsString((string)$domBody);

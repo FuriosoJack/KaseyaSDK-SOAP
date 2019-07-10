@@ -1,14 +1,14 @@
 <?php
 
 
-namespace FuriosoJack\KaseyaSDKSOAP\Request\DOM;
+namespace FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request;
 
 /**
  * Class AuthDOM
  * @package FuriosoJack\KaseyaSDKSOAP\Request\DOM
  * @author Juan Diaz - FuriosoJack <iam@furiosojack.com>
  */
-class AuthDOM
+class AuthRequestDOM
 {
 
     private $domDocument;
