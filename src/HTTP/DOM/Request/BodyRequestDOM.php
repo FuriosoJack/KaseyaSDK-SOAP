@@ -8,13 +8,9 @@ namespace FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request;
  * @package FuriosoJack\KaseyaSDKSOAP\Request\DOM
  * @author Juan Diaz - FuriosoJack <iam@furiosojack.com>
  */
-class BodyRequestDOM
+class BodyRequestDOM extends BasicDOM
 {
 
-    /**
-     * @var \DOMDocument
-     */
-    private $domDocumnet;
 
     /**
      * @var \DOMDocument
@@ -27,21 +23,18 @@ class BodyRequestDOM
      */
     public function __construct(\DOMDocument $elementBody)
     {
-        $this->domDocumnet = new \DOMDocument();
+        parent::__construct();
         $this->elementBody = $elementBody;
     }
 
 
-    /**
-     * Se encarga de crear la estrucutra del DOM
-     */
-    public function storeStructure()
+    public function compose()
     {
-        $element = $this->domDocumnet->createElementNS("http://schemas.xmlsoap.org/soap/envelope/","soap:Envelope");
-        $atributens = $this->domDocumnet->createAttribute("xmlns:xsi");
+        $element = $this->domDocument->createElementNS("http://schemas.xmlsoap.org/soap/envelope/","soap:Envelope");
+        $atributens = $this->domDocument->createAttribute("xmlns:xsi");
         $atributens->value = "http://www.w3.org/2001/XMLSchema-instance";
 
-        $atributens2 = $this->domDocumnet->createAttribute("xmlns:xsd");
+        $atributens2 = $this->domDocument->createAttribute("xmlns:xsd");
         $atributens2->value = "http://www.w3.org/2001/XMLSchema";
 
         $element->appendChild($atributens);
@@ -49,18 +42,17 @@ class BodyRequestDOM
 
 
 
-        $elementBody = $this->domDocumnet->createElement("soap:Body");
+        $elementBody = $this->domDocument->createElement("soap:Body");
 
 
         //Solo se añade el nodo si no esta vacio
         if($this->elementBody->firstChild != null){
-            $node = $this->domDocumnet->importNode($this->elementBody->firstChild,TRUE);
+            $node = $this->domDocument->importNode($this->elementBody->firstChild,TRUE);
             $elementBody->appendChild($node);
         }
 
         $element->appendChild($elementBody);
-        $this->domDocumnet->appendChild($element);
-
+        $this->domDocument->appendChild($element);
     }
 
     /**
@@ -68,8 +60,9 @@ class BodyRequestDOM
      */
     public function __toString()
     {
-        return $this->domDocumnet->saveXML();
+        return $this->domDocument->saveXML();
     }
+
 
 
 }

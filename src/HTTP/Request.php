@@ -97,7 +97,7 @@ class Request
     public function send(\DOMDocument $content): Response
     {
         $domBody = new BodyRequestDOM($content);
-        $domBody->storeStructure();
+        $domBody->compose();
         $this->setContet((string)$domBody);
         $responseRAW = curl_exec($this->clientCurl);
         return new Response($this->clientCurl,$responseRAW);

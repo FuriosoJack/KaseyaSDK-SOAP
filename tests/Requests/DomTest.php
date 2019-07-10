@@ -28,7 +28,7 @@ class DomTest extends TestCase
         $domAuth->setCoredPassword($coredPassword);
         $domAuth->setRandomKey($randomKey);
         $domAuth->setUsername(getenv("USERNAME_SERVER"));
-        $domAuth->storeStructure();
+        $domAuth->compose();
 
         $this->assertIsString((string)$domAuth);
 
@@ -52,10 +52,10 @@ class DomTest extends TestCase
         $domAuth->setCoredPassword($coredPassword);
         $domAuth->setRandomKey($randomKey);
         $domAuth->setUsername(getenv("USERNAME_SERVER"));
-        $domAuth->storeStructure();
+        $domAuth->compose();
 
         $domBody = new BodyRequestDOM($domAuth->getDocument());
-        $domBody->storeStructure();
+        $domBody->compose();
 
         $this->assertIsString((string)$domBody);
     }

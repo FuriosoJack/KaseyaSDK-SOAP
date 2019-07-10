@@ -8,13 +8,8 @@ namespace FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request;
  * @package FuriosoJack\KaseyaSDKSOAP\Request\DOM
  * @author Juan Diaz - FuriosoJack <iam@furiosojack.com>
  */
-class AuthRequestDOM
+class AuthRequestDOM extends BasicDOM
 {
-
-    /**
-     * @var \DOMDocument
-     */
-    private $domDocument;
 
     /**
      * @var
@@ -36,15 +31,6 @@ class AuthRequestDOM
      */
     private $algorithm;
 
-
-    /**
-     * AuthRequestDOM constructor.
-     */
-    public function __construct()
-    {
-        $this->domDocument = new \DOMDocument();
-
-    }
 
     /**
      * @param mixed $username
@@ -81,9 +67,8 @@ class AuthRequestDOM
     /**
      * Se encarga de crea la estructura del DOM
      */
-    public function storeStructure()
+    public function compose()
     {
-
 
         $elementAuthenticate = $this->domDocument->createElementNS("KaseyaWS","Authenticate",null);
 

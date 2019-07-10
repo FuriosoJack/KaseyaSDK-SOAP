@@ -7,7 +7,7 @@ use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Response\AuthResponseDOM;
 
 
 /**
- * Class Session
+ * Clase que se encarga de hacer peticion bajo un mismo SEssionID
  * @package FuriosoJack\KaseyaSDKSOAP\Request
  * @author Juan Diaz - FuriosoJack <iam@furiosojack.com>
  */
@@ -59,7 +59,7 @@ class Session
         $domAuth->setCoredPassword($coredPassword);
         $domAuth->setRandomKey($randomKey);
         $domAuth->setUsername($this->credentials->getUsername());
-        $domAuth->storeStructure();
+        $domAuth->compose();
 
         $response =  $request->send($domAuth->getDocument());
 

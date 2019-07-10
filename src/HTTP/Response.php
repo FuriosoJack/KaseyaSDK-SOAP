@@ -4,7 +4,7 @@
 namespace FuriosoJack\KaseyaSDKSOAP\HTTP;
 
 /**
- * Class Response
+ * Clase que representa la respuesta del servoidor
  * @package FuriosoJack\KaseyaSDKSOAP\Request
  * @author Juan Diaz - FuriosoJack <iam@furiosojack.com>
  */
