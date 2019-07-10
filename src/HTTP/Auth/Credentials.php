@@ -10,9 +10,21 @@ namespace FuriosoJack\KaseyaSDKSOAP\HTTP\Auth;
  */
 class Credentials
 {
+    /**
+     * @var string
+     */
     private $username;
+
+    /**
+     * @var string
+     */
     private $password;
 
+    /**
+     * Credentials constructor.
+     * @param string $username
+     * @param string $password
+     */
     public function __construct(string $username, string $password)
     {
         $this->username = $username;
