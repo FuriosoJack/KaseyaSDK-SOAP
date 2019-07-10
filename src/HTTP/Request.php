@@ -90,15 +90,44 @@ class Request
 
     }
 
+
+    private function buildDOMBody($elementBody)
+    {
+        $domDocument = new \DOMDocument();
+        $element = $domDocument->createElementNS("http://schemas.xmlsoap.org/soap/envelope/","soap:Envelope");
+        $atributens = $domDocument->createAttribute("xmlns:xsi");
+        $atributens->value = "http://www.w3.org/2001/XMLSchema-instance";
+
+        $atributens2 = $domDocument->createAttribute("xmlns:xsd");
+        $atributens2->value = "http://www.w3.org/2001/XMLSchema";
+
+        $element->appendChild($atributens);
+        $element->appendChild($atributens2);
+
+
+
+        $elementContent = $domDocument->createElement("soap:Body");
+
+
+        //Solo se añade el nodo si no esta vacio
+        if($elementBody->firstChild != null){
+            $node = $domDocument->importNode($elementBody->firstChild,TRUE);
+            $elementContent->appendChild($node);
+        }
+
+        $element->appendChild($elementContent);
+        $domDocument->appendChild($element);
+
+        return $domDocument->saveXML();
+    }
+
     /**
      * Se encarga de enviar la solicitud
      * @param $body
      */
     public function send(\DOMDocument $content): Response
     {
-        $domBody = new BodyRequestDOM($content);
-        $domBody->compose();
-        $this->setContet((string)$domBody);
+        $this->setContet($this->buildDOMBody($content));
         $responseRAW = curl_exec($this->clientCurl);
         return new Response($this->clientCurl,$responseRAW);
     }

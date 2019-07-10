@@ -111,4 +111,8 @@ class AuthRequestDOM extends BasicDOM
     }
 
 
+    public static function getHeader()
+    {
+        return 'SOAPAction: "KaseyaWS/Authenticate"';
+    }
 }

@@ -15,4 +15,9 @@ class CreateAdminRequestDOM extends BasicDOM
     {
         // TODO: Implement compose() method.
     }
+
+    public static function getHeader()
+    {
+        // TODO: Implement getHeader() method.
+    }
 }

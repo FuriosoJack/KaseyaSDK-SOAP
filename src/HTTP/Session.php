@@ -47,7 +47,7 @@ class Session
     {
         $request = new Request($this->urlServer);
 
-        $request->addHeader('SOAPAction: "KaseyaWS/Authenticate"');
+        $request->addHeader(AuthRequestDOM::getHeader());
 
         $randomKey = HelpersMan::random_string(14, "0123456789");
 

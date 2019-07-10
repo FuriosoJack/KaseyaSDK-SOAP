@@ -34,30 +34,5 @@ class DomTest extends TestCase
 
     }
 
-    /**
-     * Hace el test a la creacion del Body
-     * @throws \Exception
-     */
-    public function testBody()
-    {
-
-
-        $randomKey = HelpersMan::random_string(14, "0123456789");
-
-        $coredPassword = hash('sha256', hash('sha256', getenv("PASSWORD_SERVER") . getenv("USERNAME_SERVER")) . $randomKey);
-
-        //Se crea el contenido de la peticion
-        $domAuth = new AuthRequestDOM();
-        $domAuth->setAlgorithm("SHA-256");
-        $domAuth->setCoredPassword($coredPassword);
-        $domAuth->setRandomKey($randomKey);
-        $domAuth->setUsername(getenv("USERNAME_SERVER"));
-        $domAuth->compose();
-
-        $domBody = new BodyRequestDOM($domAuth->getDocument());
-        $domBody->compose();
-
-        $this->assertIsString((string)$domBody);
-    }
 
 }
