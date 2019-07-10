@@ -92,23 +92,7 @@ class AuthRequestDOM extends BasicDOM
     }
 
 
-    /**
-     * @return \DOMDocument
-     */
-    public function getDocument():\DOMDocument
-    {
-        return $this->domDocument;
-    }
 
-    /**
-     * @return string
-     */
-    public function __toString()
-    {
-        $element = $this->domDocument->firstChild;
-        $xmlString = $this->domDocument->saveXML($element);
-        return $xmlString;
-    }
 
 
     public static function getHeader()

@@ -5,6 +5,7 @@ namespace FuriosoJack\KaseyaSDKSOAP\Tests\Requests;
 use Codwelt\HelpersMan\HelpersMan;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\AuthRequestDOM;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\BodyRequestDOM;
+use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\CreateAdminRequestDOM;
 use FuriosoJack\KaseyaSDKSOAP\Tests\TestCase;
 
 /**
@@ -31,6 +32,14 @@ class DomTest extends TestCase
         $domAuth->compose();
 
         $this->assertIsString((string)$domAuth);
+
+    }
+
+    public function testCreateAdmin()
+    {
+        $domAdmin = new CreateAdminRequestDOM("iam@furiosojack.com","furiosojack","ROLEOID","SCOPEID","COVERPASS",true,"Juan","Diaz","ORGDEP","memeberRTef","1234");
+        $domAdmin->compose();
+        $this->assertIsString((string)$domAdmin);
 
     }
 

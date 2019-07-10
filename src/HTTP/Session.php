@@ -61,8 +61,7 @@ class Session
         $domAuth->setUsername($this->credentials->getUsername());
         $domAuth->compose();
 
-        $response =  $request->send($domAuth->getDocument());
-
+        $response =  $request->send($domAuth->getDomDocument());
 
         if($response->getStatusCode() == 200){
             $this->authResponseDOM = new AuthResponseDOM($response->getBody(false));
