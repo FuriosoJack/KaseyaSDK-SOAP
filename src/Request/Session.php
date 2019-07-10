@@ -18,14 +18,14 @@ class Session
 
     private $credentials;
     private $urlServer;
+    private $session_open;
 
     public function __construct(Credentials $credentials,$urlServer)
     {
         $this->credentials = $credentials;
         $this->urlServer =  $urlServer;
+        $this->session_open = false;
     }
-
-
 
     public function auth()
     {
@@ -34,7 +34,8 @@ class Session
         $request->addHeader('SOAPAction: "KaseyaWS/Authenticate"');
 
         $randomKey = HelpersMan::random_string(14, "0123456789");
-        $coredPassword = hash('sha256', hash('sha256', $this->credentials->getPassword() . $this->credentials->getUsername()) . $randomKey) .
+
+        $coredPassword = hash('sha256', hash('sha256', $this->credentials->getPassword() . $this->credentials->getUsername()) . $randomKey);
 
         //Se crea el contenido de la peticion
         $domAuth = new AuthDOM();
@@ -42,12 +43,22 @@ class Session
         $domAuth->setCoredPassword($coredPassword);
         $domAuth->setRandomKey($randomKey);
         $domAuth->setUsername($this->credentials->getUsername());
-        
-        $response =  $request->send($domAuth);
-        var_dump($response);
+        $domAuth->storeStructure();
+
+        $response =  $request->send($domAuth->getDocument());
 
 
+        if($response->getStatusCode() == 200){
+            $this->session_open = true;
+        }
 
+
+    }
+
+
+    public function sessionOpen()
+    {
+        return $this->session_open;
     }
 
 

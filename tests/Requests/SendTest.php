@@ -20,16 +20,16 @@ class SendTest extends TestCase
     {
         $url = getenv('URL_SERVER');
         $request = new Request($url);
-        $response = $request->send(null);
+        $response = $request->send(new \DOMDocument());
         $this->assertIsInt(200,$response->getStatusCode());
-
     }
 
     public function testSession()
     {
-        $credential = new Credentials("juan","juan");
+        $credential = new Credentials(getenv("USERNAME_SERVER"),getenv("PASSWORD_SERVER"));
         $session = new Session($credential,getenv('URL_SERVER'));
         $session->auth();
+        $this->assertTrue($session->sessionOpen());
     }
 
 }

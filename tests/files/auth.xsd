@@ -1,0 +1,18 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="KaseyaWS" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="Authenticate">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="req">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element type="xs:string" name="UserName"/>
+                            <xs:element type="xs:string" name="CoveredPassword"/>
+                            <xs:element type="xs:long" name="RandomNumber"/>
+                            <xs:element type="xs:string" name="HashingAlgorithm"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

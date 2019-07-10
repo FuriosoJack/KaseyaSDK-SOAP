@@ -91,7 +91,8 @@ class AuthDOM
 
     public function __toString()
     {
-        $xmlString = $this->domDocument->saveXML();
+        $element = $this->domDocument->firstChild;
+        $xmlString = $this->domDocument->saveXML($element);
         return $xmlString;
     }
 

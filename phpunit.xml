@@ -12,6 +12,7 @@
     <testsuites>
         <testsuite name="RequestsCrear">
             <file>tests/Requests/SendTest.php</file>
+            <file>tests/Requests/DomTest.php</file>
         </testsuite>
     </testsuites>
 

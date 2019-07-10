@@ -2,6 +2,7 @@
 
 
 namespace FuriosoJack\KaseyaSDKSOAP\Request;
+use FuriosoJack\KaseyaSDKSOAP\Request\DOM\BodyDOM;
 
 /**
  * Clase que se encarga de hacer la peticion al servidor
@@ -90,9 +91,11 @@ class Request
      * Se encarga de enviar la solicitud
      * @param $body
      */
-    public function send($body): Response
+    public function send(\DOMDocument $content): Response
     {
-        $this->setContet($body);
+        $domBody = new BodyDOM($content);
+        $domBody->storeStructure();
+        $this->setContet((string)$domBody);
         $responseRAW = curl_exec($this->clientCurl);
         return new Response($this->clientCurl,$responseRAW);
     }
