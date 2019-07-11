@@ -1,8 +1,10 @@
 <?php
 namespace FuriosoJack\KaseyaSDKSOAP\Tests\Requests;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\Auth\Credentials;
+use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\AddOrgRequestDOM;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\AddScopeRequestDOM;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\AuthRequestDOM;
+use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\CreateAdminRequestDOM;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\GetOrgsRequestDOM;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\Request;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\Session;
@@ -67,7 +69,55 @@ class SendTest extends TestCase
 
         }
         $this->assertTrue(false);
+    }
 
+
+    public function testAddOrg()
+    {
+        $credential = new Credentials(getenv("USERNAME_SERVER"),getenv("PASSWORD_SERVER"));
+        $session = new Session($credential,getenv('URL_SERVER'));
+
+        if($session->auth()) {
+            $orgAdd = new AddOrgRequestDOM("TESTCOP22E","TESTCOP22E","root","root","null","Internal",$session->getAuthResponseDOM()->getSessionID());
+
+            $response = $session->request($orgAdd);
+
+            if($response->getStatusCode() != 200){
+                $this->assertTrue(true);
+                return;
+            }
+            $responseDom = $response->getResponseDOM();
+            $this->assertTrue(empty($responseDom->getErrorMessage()));
+
+
+
+
+        }
+
+    }
+
+    public function testAddUser()
+    {
+        $credential = new Credentials(getenv("USERNAME_SERVER"),getenv("PASSWORD_SERVER"));
+        $session = new Session($credential,getenv('URL_SERVER'));
+
+        if($session->auth()){
+
+            $converPassword = hash("sha256","password"."furiosojack2");
+            $createUser = new CreateAdminRequestDOM("iam2@furiosojack.com","furiosojack2","CORPORATE","TESTCOP22E",$converPassword,true,"Juan","Dias","TESTCOP22E","TESTCOP22E.root",$session->getAuthResponseDOM()->getSessionID());
+            $response = $session->request($createUser);
+
+
+            if($response->getStatusCode() != 200){
+                $this->assertTrue(true);
+                return;
+            }
+
+            $responseDOm = $response->getResponseDOM();
+
+            $this->assertTrue(empty($responseDOm->getErrorMessage()));
+
+        }
 
     }
 
