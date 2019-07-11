@@ -14,7 +14,6 @@ class AuthResponseDOM extends BasicResponseDOM
     private $sessionID;
 
 
-
     /**
      * Se enccarga de descomponer el dom a valores del objeto
      */
