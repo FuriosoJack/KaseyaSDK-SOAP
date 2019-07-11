@@ -3,9 +3,11 @@
 
 namespace FuriosoJack\KaseyaSDKSOAP\Tests\Requests;
 use Codwelt\HelpersMan\HelpersMan;
+use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\AddScopeRequestDOM;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\AuthRequestDOM;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\BodyRequestDOM;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\CreateAdminRequestDOM;
+use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\GetOrgsRequestDOM;
 use FuriosoJack\KaseyaSDKSOAP\Tests\TestCase;
 
 /**
@@ -42,6 +44,23 @@ class DomTest extends TestCase
         $this->assertIsString((string)$domAdmin);
 
     }
+
+    public function testAddScope()
+    {
+        $scopeDom = new AddScopeRequestDOM("TEST", "testttt");
+        $scopeDom->compose();
+        $this->assertIsString((string)$scopeDom);
+
+    }
+
+    public function testGetOrgs()
+    {
+        $getOrgs = new GetOrgsRequestDOM("SESSIONID");
+        $getOrgs->compose();
+        $this->assertIsString((string)$getOrgs);
+
+    }
+
 
 
 }

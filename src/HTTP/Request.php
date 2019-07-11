@@ -2,6 +2,7 @@
 
 
 namespace FuriosoJack\KaseyaSDKSOAP\HTTP;
+use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\BasicRequestDOM;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\BodyRequestDOM;
 
 /**
@@ -23,11 +24,14 @@ class Request
      */
     private $headers;
 
+
+
+
     /**
      * Request constructor.
      * @param $url
      */
-    public function __construct($url)
+    public function __construct($url, $classResponse = null)
     {
         $this->headers = array(
             'Content-type: text/xml;charset="utf-8"',
@@ -110,10 +114,10 @@ class Request
 
 
         //Solo se añade el nodo si no esta vacio
-        if($elementBody->firstChild != null){
-            $node = $domDocument->importNode($elementBody->firstChild,TRUE);
-            $elementContent->appendChild($node);
-        }
+
+        $node = $domDocument->importNode($elementBody->firstChild,TRUE);
+        $elementContent->appendChild($node);
+
 
         $element->appendChild($elementContent);
         $domDocument->appendChild($element);
@@ -125,11 +129,15 @@ class Request
      * Se encarga de enviar la solicitud
      * @param $body
      */
-    public function send(\DOMDocument $content): Response
+    public function send(BasicRequestDOM $content): Response
     {
-        $this->setContet($this->buildDOMBody($content));
+        //Se contrulle el Dom
+        $content->compose();
+        //Se añade el header
+        $this->addHeader($content->getHeader());
+        $this->setContet($this->buildDOMBody($content->getDomDocument()));
         $responseRAW = curl_exec($this->clientCurl);
-        return new Response($this->clientCurl,$responseRAW);
+        return new Response($this->clientCurl,$responseRAW,$content->getClassResponse());
     }
 
 

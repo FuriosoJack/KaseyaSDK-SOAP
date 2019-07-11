@@ -25,14 +25,21 @@ class Response
     private $statusCode;
 
     /**
+     * @var
+     */
+    private $classResponse;
+
+    /**
      * Response constructor.
      * @param $curlClient
      * @param $bodyResponseRaw
      */
-    public function __construct($curlClient, $bodyResponseRaw)
+    public function __construct($curlClient, $bodyResponseRaw, $classResponse = null)
     {
         $this->extractData($curlClient);
         $this->bodyResponse = $bodyResponseRaw;
+        $this->classResponse = $classResponse;
+
     }
 
     /**
@@ -79,6 +86,12 @@ class Response
         $domResponse = new \DOMDocument();
         $domResponse->loadXML($this->purificateXML());
         return $domResponse;
+    }
+
+    public function getResponseDOM()
+    {
+        $classResponseDOM = $this->classResponse;
+        return new $classResponseDOM($this->getBody(false));
     }
 
 

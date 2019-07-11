@@ -1,14 +1,14 @@
 <?php
-
-
 namespace FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request;
+use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Response\AddOrgToScopeResponseDOM;
+
 
 /**
  * Class AddOrgToScopeRequestDOM
  * @package FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request
  * @author Juan Diaz - FuriosoJack <iam@furiosojack.com>
  */
-class AddOrgToScopeRequestDOM extends BasicDOM
+class AddOrgToScopeRequestDOM extends BasicRequestDOM
 {
 
     /**
@@ -58,8 +58,17 @@ class AddOrgToScopeRequestDOM extends BasicDOM
         $this->domDocument->appendChild($elementBase);
     }
 
-    public static function getHeader()
+    public function getHeader():string
     {
         return 'SOAPAction: "KaseyaWS/AddOrgToScope"';
+    }
+
+    /**
+     * Devuelve la clase response que va a tener el request
+     * @return mixed
+     */
+    public function getClassResponse()
+    {
+        return AddOrgToScopeResponseDOM::class;
     }
 }

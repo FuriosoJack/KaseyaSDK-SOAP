@@ -3,6 +3,7 @@ namespace FuriosoJack\KaseyaSDKSOAP\HTTP;
 use Codwelt\HelpersMan\HelpersMan;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\Auth\Credentials;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\AuthRequestDOM;
+use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\BasicRequestDOM;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Response\AuthResponseDOM;
 
 
@@ -47,8 +48,6 @@ class Session
     {
         $request = new Request($this->urlServer);
 
-        $request->addHeader(AuthRequestDOM::getHeader());
-
         $randomKey = HelpersMan::random_string(14, "0123456789");
 
         $coredPassword = hash('sha256', hash('sha256', $this->credentials->getPassword() . $this->credentials->getUsername()) . $randomKey);
@@ -59,13 +58,14 @@ class Session
         $domAuth->setCoredPassword($coredPassword);
         $domAuth->setRandomKey($randomKey);
         $domAuth->setUsername($this->credentials->getUsername());
-        $domAuth->compose();
 
-        $response =  $request->send($domAuth->getDomDocument());
+        $response =  $request->send($domAuth);
 
         if($response->getStatusCode() == 200){
-            $this->authResponseDOM = new AuthResponseDOM($response->getBody(false));
+            $this->authResponseDOM = $response->getResponseDOM();
+            return true;
         }
+        return false;
 
     }
 
@@ -75,6 +75,13 @@ class Session
     public function getAuthResponseDOM(): AuthResponseDOM
     {
         return $this->authResponseDOM;
+    }
+
+
+    public function request(BasicRequestDOM $domBasic): Response
+    {
+        $request = new Request($this->urlServer);
+        return $request->send($domBasic);
     }
 
 

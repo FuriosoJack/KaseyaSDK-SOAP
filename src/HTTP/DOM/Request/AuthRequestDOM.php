@@ -1,14 +1,13 @@
 <?php
-
-
 namespace FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request;
+use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Response\AuthResponseDOM;
 
 /**
  * Class AuthDOM
  * @package FuriosoJack\KaseyaSDKSOAP\Request\DOM
  * @author Juan Diaz - FuriosoJack <iam@furiosojack.com>
  */
-class AuthRequestDOM extends BasicDOM
+class AuthRequestDOM extends BasicRequestDOM
 {
 
     /**
@@ -92,11 +91,17 @@ class AuthRequestDOM extends BasicDOM
     }
 
 
-
-
-
-    public static function getHeader()
+    public function getHeader():string
     {
         return 'SOAPAction: "KaseyaWS/Authenticate"';
+    }
+
+    /**
+     * Devuelve la clase response que va a tener el request
+     * @return mixed
+     */
+    public function getClassResponse()
+    {
+        return AuthResponseDOM::class;
     }
 }

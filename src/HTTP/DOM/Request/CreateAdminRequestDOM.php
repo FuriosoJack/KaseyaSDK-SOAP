@@ -1,14 +1,13 @@
 <?php
-
-
 namespace FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request;
+use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Response\CreateAdminResponseDOM;
 
 /**
  * Class clase de la estrucura XML para crear un usuario
  * @package FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request
  * @author Juan Diaz - FuriosoJack <iam@furiosojack.com>
  */
-class CreateAdminRequestDOM extends BasicDOM
+class CreateAdminRequestDOM extends BasicRequestDOM
 {
 
     /**
@@ -132,8 +131,17 @@ class CreateAdminRequestDOM extends BasicDOM
 
     }
 
-    public static function getHeader()
+    public function getHeader():string
     {
         return 'SOAPAction: "KaseyaWS/CreateAdmin"';
+    }
+
+    /**
+     * Devuelve la clase response que va a tener el request
+     * @return mixed
+     */
+    public function getClassResponse()
+    {
+        return CreateAdminResponseDOM::class;
     }
 }

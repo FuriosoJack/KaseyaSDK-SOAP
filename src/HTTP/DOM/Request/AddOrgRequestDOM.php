@@ -2,13 +2,15 @@
 
 
 namespace FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request;
+use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Response\AddOrgResponseDOM;
+use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Response\AuthResponseDOM;
 
 /**
  * Class AddOrgRequestDOM
  * @package FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request
  * @author Juan Diaz - FuriosoJack <iam@furiosojack.com>
  */
-class AddOrgRequestDOM extends BasicDOM
+class AddOrgRequestDOM extends BasicRequestDOM
 {
 
 
@@ -97,8 +99,17 @@ class AddOrgRequestDOM extends BasicDOM
 
     }
 
-    public static function getHeader()
+    public function getHeader():string
     {
         return 'SOAPAction: "KaseyaWS/AddOrg"';
+    }
+
+    /**
+     * Devuelve la clase response que va a tener el request
+     * @return mixed
+     */
+    public function getClassResponse()
+    {
+        return AddOrgResponseDOM::class;
     }
 }

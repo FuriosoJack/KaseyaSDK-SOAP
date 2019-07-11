@@ -1,18 +1,29 @@
 <?php
-
-
 namespace FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request;
+use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Response\AddUserToRoleResponseDOM;
+
 
 /**
  * Class AddUserToRoleRequestDOM
  * @package FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request
  * @author Juan Diaz - FuriosoJack <iam@furiosojack.com>
  */
-class AddUserToRoleRequestDOM extends BasicDOM
+class AddUserToRoleRequestDOM extends BasicRequestDOM
 {
 
+    /**
+     * @var
+     */
     private $userName;
+
+    /**
+     * @var
+     */
     private $roleID;
+
+    /**
+     * @var
+     */
     private $sessionID;
 
     /**
@@ -51,8 +62,17 @@ class AddUserToRoleRequestDOM extends BasicDOM
 
     }
 
-    public static function getHeader()
+    public function getHeader():string
     {
         return 'SOAPAction: "KaseyaWS/AddUserToRole"';
+    }
+
+    /**
+     * Devuelve la clase response que va a tener el request
+     * @return mixed
+     */
+    public function getClassResponse()
+    {
+        return AddUserToRoleResponseDOM::class;
     }
 }
