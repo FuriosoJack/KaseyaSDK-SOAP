@@ -1,5 +1,6 @@
 <?php
 namespace FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request;
+use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Response\AddUserToScopeResponseDOM;
 
 /**
  * Class AddUserToScopeRequestDOM
@@ -41,7 +42,7 @@ class AddUserToScopeRequestDOM extends BasicRequestDOM
 
     public function compose()
     {
-        $elementBase = $this->domDocument->createAttributeNS("KaseyaWS","AddUserToScope");
+        $elementBase = $this->domDocument->createElementNS("KaseyaWS","AddUserToScope",null);
 
         $elementRQ = $this->domDocument->createElement("req");
 
@@ -72,6 +73,6 @@ class AddUserToScopeRequestDOM extends BasicRequestDOM
      */
     public function getClassResponse()
     {
-        // TODO: Implement getClassResponse() method.
+        return AddUserToScopeResponseDOM::class;
     }
 }

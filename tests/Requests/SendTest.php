@@ -3,6 +3,7 @@ namespace FuriosoJack\KaseyaSDKSOAP\Tests\Requests;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\Auth\Credentials;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\AddOrgRequestDOM;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\AddScopeRequestDOM;
+use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\AddUserToScopeRequestDOM;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\AuthRequestDOM;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\CreateAdminRequestDOM;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\GetOrgsRequestDOM;
@@ -118,6 +119,30 @@ class SendTest extends TestCase
             $this->assertTrue(empty($responseDOm->getErrorMessage()));
 
         }
+
+    }
+
+    public function testAddUserToScope()
+    {
+
+        $credential = new Credentials(getenv("USERNAME_SERVER"),getenv("PASSWORD_SERVER"));
+        $session = new Session($credential,getenv('URL_SERVER'));
+
+        if($session->auth()){
+
+            $addUserDom = new AddUserToScopeRequestDOM("furiosojack2","TESTCOP22E",$session->getAuthResponseDOM()->getSessionID());
+
+            $response = $session->request($addUserDom);
+
+            if($response->getStatusCode() != 200){
+                $this->assertTrue(false);
+                return false;
+            }
+
+            $responswDom = $response->getResponseDOM();
+            $this->assertTrue(empty($responswDom->getErrorMessage()));
+        }
+
 
     }
 
