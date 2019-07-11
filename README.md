@@ -1,37 +1,74 @@
-## Welcome to GitHub Pages
+## Bienvenido a KaseyaSDK para PHP
 
-You can use the [editor on GitHub](https://github.com/FuriosoJack/KaseyaSDK-SOAP/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Con este repositorio puedes hacer peticiones al webservice de Kaseya. Que se encuentra en todos lo servidores con la ruta `https://server/vsaWS/KaseyaWS.asmx`
 
-### Markdown
+### Instalacion
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Para hacer la instalacion con 
 
-```markdown
-Syntax highlighted code block
+`composer require furiosojack/kaseya-sdk-soap`
 
-# Header 1
-## Header 2
-### Header 3
+### Uso
 
-- Bulleted
-- List
+Lo primero es crear un objeto credential, el cual recibe como parametros en el contructuro el usuario y el password.
 
-1. Numbered
-2. List
+```php
 
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+$username = "test";
+$password = "123456";
+$credentials = FuriosoJack\KaseyaSDKSOAP\HTTP\Auth\Credentials($username, $password);
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+Lo siguiente seria crear la sesicion que se encarga de autenticarse y guardar el sessionID que se necesitara para todas la peticiones.
 
-### Jekyll Themes
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/FuriosoJack/KaseyaSDK-SOAP/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+```php
 
-### Support or Contact
+$urlServer = "https://server/vsaWS/KaseyaWS.asmx";
+$session = new FuriosoJack\KaseyaSDKSOAP\HTTP\Session($credentials,$urlServer);
+if($session->auth()){
+    //Esta autenticado
+     
+}else{
+    //No se autentico            
+}
+```
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+Las peticiones que puede realizar con este paquete por ahora son las siguientes
+- AddOrg
+- AddOrgToScope
+- AddScope
+- AddUserToRole
+- AddUserToScope
+- CreateAdmin
+- GetOrgs
+
+Ahora para ejecutar alguna de estas peticiones debe saber que cada una de ella tiene su clase que se encarga de contruir el XML.
+
+Todas las peticiones estan en el namespace `FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\`
+
+### Ejemplo GetOrgs
+
+```php
+    //Para botener la lista de organizaciones vasta con el siguiente codigo
+    
+    $username = "test";
+    $password = "123456";
+    $credentials = FuriosoJack\KaseyaSDKSOAP\HTTP\Auth\Credentials($username, $password);
+    $urlServer = "https://server/vsaWS/KaseyaWS.asmx";
+    $session = new FuriosoJack\KaseyaSDKSOAP\HTTP\Session($credentials,$urlServer);
+    if($session->auth()){
+        //Esta autenticado
+         $response = $session->request(new FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\GetOrgsRequestDOM($session->getAuthResponseDOM()->getSessionID()));
+         //DomResponse
+         $domResponse = $response->getResponseDOM();
+    }else{
+        //No se autentico            
+    }
+        
+```
+
+La variable `$domResponse` declarada en el ejemplo representa aun objeto response ubicado en el namespace `FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Response` para este caso que como se llamo al `GetOrgsRequestDOM` devolveria un objeto `GetOrgsResponseDOM` del cual puede obtener la linta de organizacion por medio del metodo getOrgs() y el cual devuelve un array de Objectos `FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Elements\Org`
+
+
