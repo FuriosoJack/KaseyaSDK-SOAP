@@ -1,7 +1,7 @@
 ## Bienvenido a KaseyaSDK para PHP
 
 
-Con este repositorio puedes hacer peticiones al webservice de Kaseya. Que se encuentra en todos lo servidores con la ruta `https://server/vsaWS/KaseyaWS.asmx`
+Con este repositorio puedes hacer peticiones al webservice de Kaseya. Que se encuentra en todos lo servidores con la ruta `https://127.0.0.1/vsaWS/KaseyaWS.asmx`
 
 ### Instalacion
 
@@ -25,7 +25,7 @@ Lo siguiente seria crear la sesicion que se encarga de autenticarse y guardar el
 
 ```php
 
-$urlServer = "https://server/vsaWS/KaseyaWS.asmx";
+$hostServer = "127.0.0.1";
 $session = new FuriosoJack\KaseyaSDKSOAP\HTTP\Session($credentials,$urlServer);
 if($session->auth()){
     //Esta autenticado
@@ -56,7 +56,7 @@ Todas las peticiones estan en el namespace `FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\R
     $username = "test";
     $password = "123456";
     $credentials = FuriosoJack\KaseyaSDKSOAP\HTTP\Auth\Credentials($username, $password);
-    $urlServer = "https://server/vsaWS/KaseyaWS.asmx";
+    $hostServer = "127.0.0.1";
     $session = new FuriosoJack\KaseyaSDKSOAP\HTTP\Session($credentials,$urlServer);
     if($session->auth()){
         //Esta autenticado

@@ -22,7 +22,7 @@ class Session
     /**
      * @var
      */
-    private $urlServer;
+    private $host;
 
     /**
      * @var
@@ -34,10 +34,10 @@ class Session
      * @param Credentials $credentials
      * @param $urlServer
      */
-    public function __construct(Credentials $credentials,$urlServer)
+    public function __construct(Credentials $credentials,$host)
     {
         $this->credentials = $credentials;
-        $this->urlServer =  $urlServer;
+        $this->host =  $host;
 
     }
 
@@ -46,7 +46,7 @@ class Session
      */
     public function auth()
     {
-        $request = new Request($this->urlServer);
+        $request = new Request($this->host);
 
         $randomKey = HelpersMan::random_string(14, "0123456789");
 
@@ -80,7 +80,7 @@ class Session
 
     public function request(BasicRequestDOM $domBasic): Response
     {
-        $request = new Request($this->urlServer);
+        $request = new Request($this->host);
         return $request->send($domBasic);
     }
 

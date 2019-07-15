@@ -13,6 +13,22 @@ use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\BodyRequestDOM;
 class Request
 {
 
+
+    /**
+     * Es la pre url del servidor por medio de certificado SSl
+     */
+    const HTTP_SSL = "https://";
+
+    /**
+     * Es la pre url del servidor
+     */
+    const HTTP = "http://";
+
+    /**
+     * Ruta del WebService
+     */
+    const RESOURCE_URL = "/vsaWS/KaseyaWS.asmx";
+
     /**
      * @var resource
      */
@@ -29,9 +45,10 @@ class Request
 
     /**
      * Request constructor.
-     * @param $url
+     * @param $host host del servidor al que se le realizara la peticion
+     * @param $classResponse la clase response con la cual se devolvera el Response, deben ser alguna de las que estan en el namespace FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Response
      */
-    public function __construct($url, $classResponse = null)
+    public function __construct($host, $classResponse = null)
     {
         $this->headers = array(
             'Content-type: text/xml;charset="utf-8"',
@@ -40,6 +57,8 @@ class Request
             "Pragma: no-cache");
 
         $this->clientCurl = curl_init();
+
+        $url = self::HTTP_SSL . $host .  self::RESOURCE_URL;
 
         $this->setConfigClient($url);
 
