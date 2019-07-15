@@ -26,7 +26,7 @@ Lo siguiente seria crear la sesicion que se encarga de autenticarse y guardar el
 ```php
 
 $hostServer = "127.0.0.1";
-$session = new FuriosoJack\KaseyaSDKSOAP\HTTP\Session($credentials,$urlServer);
+$session = new FuriosoJack\KaseyaSDKSOAP\HTTP\Session($credentials,$hostServer);
 if($session->auth()){
     //Esta autenticado
      
@@ -57,7 +57,7 @@ Todas las peticiones estan en el namespace `FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\R
     $password = "123456";
     $credentials = FuriosoJack\KaseyaSDKSOAP\HTTP\Auth\Credentials($username, $password);
     $hostServer = "127.0.0.1";
-    $session = new FuriosoJack\KaseyaSDKSOAP\HTTP\Session($credentials,$urlServer);
+    $session = new FuriosoJack\KaseyaSDKSOAP\HTTP\Session($credentials,$hostServer);
     if($session->auth()){
         //Esta autenticado
          $response = $session->request(new FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\GetOrgsRequestDOM($session->getAuthResponseDOM()->getSessionID()));
