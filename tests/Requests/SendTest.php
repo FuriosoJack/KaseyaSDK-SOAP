@@ -3,6 +3,7 @@ namespace FuriosoJack\KaseyaSDKSOAP\Tests\Requests;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\Auth\Credentials;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\AddOrgRequestDOM;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\AddScopeRequestDOM;
+use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\AddUserToRoleRequestDOM;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\AddUserToScopeRequestDOM;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\AuthRequestDOM;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\CreateAdminRequestDOM;
@@ -143,6 +144,28 @@ class SendTest extends TestCase
             $this->assertTrue(empty($responswDom->getErrorMessage()));
         }
 
+    }
+
+
+    public function testAddRoltoUser()
+    {
+        $credential = new Credentials(getenv("USERNAME_SERVER"),getenv("PASSWORD_SERVER"));
+        $session = new Session($credential,getenv('URL_SERVER'));
+
+        if($session->auth()){
+
+            $addrolRolUser = new AddUserToRoleRequestDOM("furiosojack2","CORPORATE",$session->getAuthResponseDOM()->getSessionID());
+
+            $response = $session->request($addrolRolUser);
+
+            if($response->getStatusCode() != 200){
+                $this->assertTrue(false);
+                return false;
+            }
+
+            $responswDom = $response->getResponseDOM();
+            $this->assertTrue(empty($responswDom->getErrorMessage()));
+        }
 
     }
 

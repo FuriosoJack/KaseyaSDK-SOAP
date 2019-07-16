@@ -4,6 +4,7 @@
 namespace FuriosoJack\KaseyaSDKSOAP\Tests\Requests;
 use Codwelt\HelpersMan\HelpersMan;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\AddScopeRequestDOM;
+use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\AddUserToRoleRequestDOM;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\AuthRequestDOM;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\BodyRequestDOM;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\CreateAdminRequestDOM;
@@ -58,6 +59,19 @@ class DomTest extends TestCase
         $getOrgs = new GetOrgsRequestDOM("SESSIONID");
         $getOrgs->compose();
         $this->assertIsString((string)$getOrgs);
+
+    }
+
+
+    public function testAddRoltoUser()
+    {
+        $addRol = new AddUserToRoleRequestDOM("USERNAME","ROLID","SESSSION");
+        $addRol->compose();
+
+        $this->assertIsString((string)$addRol);
+
+
+
 
     }
 

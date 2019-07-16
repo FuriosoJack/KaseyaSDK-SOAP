@@ -46,7 +46,7 @@ class AddUserToRoleRequestDOM extends BasicRequestDOM
 
         $elementBasic = $this->domDocument->createElementNS("KaseyaWS","AddUserToRole",null);
 
-        $elementRQ = $this->domDocument->createElement("rq");
+        $elementRQ = $this->domDocument->createElement("req");
 
         $elementUserName = $this->domDocument->createElement("UserName",$this->userName);
         $elementRoleID = $this->domDocument->createElement("RoleID",$this->roleID);
