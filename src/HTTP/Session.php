@@ -60,8 +60,7 @@ class Session
         $domAuth->setUsername($this->credentials->getUsername());
 
         $response =  $request->send($domAuth);
-
-        if($response->getStatusCode() == 200 && $response->getResponseDOM()->getErrorMessage() != null && $response->getResponseDOM()->getErrorMessage() == "") {
+        if($response->getStatusCode() == 200 && $response->getResponseDOM()->getErrorMessage() == null) {
             $this->authResponseDOM = $response->getResponseDOM();
             return true;
         }
