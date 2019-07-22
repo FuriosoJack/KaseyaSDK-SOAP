@@ -45,7 +45,6 @@ class SendTest extends TestCase
         {
             $response = $session->request(new GetOrgsRequestDOM($session->getAuthResponseDOM()->getSessionID()));
             $domResponse = $response->getResponseDOM();
-            var_dump("autenticado");
             $this->assertTrue(count($domResponse->getOrgs()) > 0);
 
         }else{
@@ -62,7 +61,7 @@ class SendTest extends TestCase
         {
             $addScope = new AddScopeRequestDOM("TESTCOP22E",$session->getAuthResponseDOM()->getSessionID() );
             $response = $session->request($addScope);
-            if($response->getStatusCode() == 200){
+            if($response->isSuccess()){
                 $domResponse = $response->getResponseDOM();
                 //No debe existir ningun mensaje para que pase el test, puede ser que el scope ya este creado
                 $this->assertTrue(empty($domResponse->getErrorMessage()));
@@ -84,14 +83,8 @@ class SendTest extends TestCase
 
             $response = $session->request($orgAdd);
 
-            if($response->getStatusCode() != 200){
-                $this->assertTrue(true);
-                return;
-            }
-            $responseDom = $response->getResponseDOM();
-            $this->assertTrue(empty($responseDom->getErrorMessage()));
 
-
+           $this->assertTrue($response->isSuccess());
 
 
         }
@@ -110,14 +103,7 @@ class SendTest extends TestCase
             $response = $session->request($createUser);
 
 
-            if($response->getStatusCode() != 200){
-                $this->assertTrue(true);
-                return;
-            }
-
-            $responseDOm = $response->getResponseDOM();
-
-            $this->assertTrue(empty($responseDOm->getErrorMessage()));
+            $this->assertTrue($response->isSuccess());
 
         }
 
@@ -135,13 +121,7 @@ class SendTest extends TestCase
 
             $response = $session->request($addUserDom);
 
-            if($response->getStatusCode() != 200){
-                $this->assertTrue(false);
-                return false;
-            }
-
-            $responswDom = $response->getResponseDOM();
-            $this->assertTrue(empty($responswDom->getErrorMessage()));
+            $this->assertTrue($response->isSuccess());
         }
 
     }
@@ -158,13 +138,7 @@ class SendTest extends TestCase
 
             $response = $session->request($addrolRolUser);
 
-            if($response->getStatusCode() != 200){
-                $this->assertTrue(false);
-                return false;
-            }
-
-            $responswDom = $response->getResponseDOM();
-            $this->assertTrue(empty($responswDom->getErrorMessage()));
+            $this->assertTrue($response->isSuccess());
         }
 
     }

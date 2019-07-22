@@ -2,6 +2,7 @@
 
 
 namespace FuriosoJack\KaseyaSDKSOAP\HTTP;
+use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Response\BasicResponseDOM;
 
 /**
  * Clase que representa la respuesta del servoidor
@@ -75,7 +76,7 @@ class Response
     /**
      * Obtiene el contenido de la peticion
      * @param bool $string
-     * @return \DOMDocument|String
+     * @return BasicResponseDOM|String
      */
     public function getBody($string = true)
     {
@@ -85,13 +86,24 @@ class Response
 
         $domResponse = new \DOMDocument();
         $domResponse->loadXML($this->purificateXML());
-        return $domResponse;
+        return new BasicResponseDOM($domResponse);
+
     }
 
     public function getResponseDOM()
     {
         $classResponseDOM = $this->classResponse;
-        return new $classResponseDOM($this->getBody(false));
+        return new $classResponseDOM($this->getBody(false)->getDomDocument());
+    }
+
+    /**
+     * Se encarga de validar si la respuesta es satisfactoria
+     * @return bool
+     */
+    public function isSuccess()
+    {
+        $basicResponse = $this->getBody(false);
+        return $this->getStatusCode() == 200 && $basicResponse->getErrorMessage() == null;
     }
 
 
