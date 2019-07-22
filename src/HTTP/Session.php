@@ -61,7 +61,7 @@ class Session
 
         $response =  $request->send($domAuth);
 
-        if($response->getStatusCode() == 200){
+        if($response->getStatusCode() == 200 && $response->getResponseDOM()->getErrorMessage() != null && $response->getResponseDOM()->getErrorMessage() == "") {
             $this->authResponseDOM = $response->getResponseDOM();
             return true;
         }

@@ -45,7 +45,7 @@ class SendTest extends TestCase
         {
             $response = $session->request(new GetOrgsRequestDOM($session->getAuthResponseDOM()->getSessionID()));
             $domResponse = $response->getResponseDOM();
-
+            var_dump("autenticado");
             $this->assertTrue(count($domResponse->getOrgs()) > 0);
 
         }else{
