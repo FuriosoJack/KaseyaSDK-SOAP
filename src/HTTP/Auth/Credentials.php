@@ -63,6 +63,10 @@ class Credentials
         $this->coredPassword = $pass;
     }
 
+    /**
+     * Deuelve el cored de las credenciales
+     * @return mixed
+     */
     public function getPreCoredPassword()
     {
         return $this->coredPassword;
