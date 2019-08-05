@@ -50,7 +50,13 @@ class Session
 
         $randomKey = HelpersMan::random_string(14, "0123456789");
 
-        $coredPassword = hash('sha256', hash('sha256', $this->credentials->getPassword() . $this->credentials->getUsername()) . $randomKey);
+        $preCoredPassword = $this->credentials->getPreCoredPassword();
+
+        //Si ya viene el coredpassword especificado en las credenciales se usa en lugar de creala
+        if(null == $preCoredPassword){
+            $preCoredPassword = hash('sha256', $this->credentials->getPassword() . $this->credentials->getUsername());
+        }
+        $coredPassword = hash('sha256', $preCoredPassword . $randomKey);
 
         //Se crea el contenido de la peticion
         $domAuth = new AuthRequestDOM();

@@ -20,6 +20,8 @@ class Credentials
      */
     private $password;
 
+    private $coredPassword;
+
     /**
      * Credentials constructor.
      * @param string $username
@@ -49,6 +51,21 @@ class Credentials
     public function getUsername()
     {
         return $this->username;
+    }
+
+
+    /**
+     * Establece el password encriptado con el nombre del usuarios
+     * @param $pass
+     */
+    public function setPreCoredPassword($pass)
+    {
+        $this->coredPassword = $pass;
+    }
+
+    public function getPreCoredPassword()
+    {
+        return $this->coredPassword;
     }
 
 }
