@@ -8,7 +8,7 @@ namespace FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Response;
  * @package FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Response
  * @author Juan Diaz - FuriosoJack <iam@furiosojack.com>
  */
-class BasicResponseDOM
+abstract class BasicResponseDOM
 {
     /**
      * @var \DOMDocument
@@ -74,10 +74,8 @@ class BasicResponseDOM
      * Metodo que se encarga de convertir los valores del dom en atributos del objeto
      * @return mixed
      */
-    protected function descompose()
-    {
+    protected abstract function descompose();
 
-    }
 
     /**
      * @return mixed
