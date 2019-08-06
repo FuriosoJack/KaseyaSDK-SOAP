@@ -43,6 +43,11 @@ Las peticiones que puede realizar con este paquete por ahora son las siguientes
 - AddUserToScope
 - CreateAdmin
 - GetOrgs
+- Auth
+- DisableAdmin
+- EnableAdmin
+- GetRoles
+- RemoveUserFromRole
 
 Ahora para ejecutar alguna de estas peticiones debe saber que cada una de ella tiene su clase que se encarga de contruir el XML.
 
