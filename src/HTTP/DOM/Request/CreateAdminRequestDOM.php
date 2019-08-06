@@ -60,10 +60,6 @@ class CreateAdminRequestDOM extends BasicRequestDOM
      */
     private $staffMemberRef;
 
-    /**
-     * @var
-     */
-    private $sessionID;
 
     /**
      * CreateAdminRequestDOM constructor.
@@ -81,7 +77,7 @@ class CreateAdminRequestDOM extends BasicRequestDOM
      */
     public function __construct($emailAddr, $userName, $roleID, $scopeID, $coveredPassword, $forceNewPassword, $firstName, $lastName, $staffDeptRef, $staffMemberRef, $sessionID)
     {
-        parent::__construct();
+        parent::__construct($sessionID);
         $this->emailAddr = $emailAddr;
         $this->userName = $userName;
         $this->roleID = $roleID;
@@ -92,7 +88,6 @@ class CreateAdminRequestDOM extends BasicRequestDOM
         $this->lastName = $lastName;
         $this->staffDeptRef = $staffDeptRef;
         $this->staffMemberRef = $staffMemberRef;
-        $this->sessionID = $sessionID;
     }
 
 

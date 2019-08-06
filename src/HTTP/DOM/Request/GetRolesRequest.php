@@ -1,19 +1,24 @@
 <?php
+
+
 namespace FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request;
-use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Response\GetOrgsResponseDOM;
+use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Response\GetRolesResponse;
 
 /**
- * Class GetOrgsRequestDOM
+ * Class GetRolesRquest
  * @package FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request
  * @author Juan Diaz - FuriosoJack <iam@furiosojack.com>
  */
-class GetOrgsRequestDOM extends BasicRequestDOM
+class GetRolesRequest extends BasicRequestDOM
 {
 
-
+    /**
+     * Se encarga de construir los nodos del dom
+     * @return void
+     */
     public function compose()
     {
-        $elementBasic = $this->domDocument->createElementNS("KaseyaWS","GetOrgs",null);
+        $elementBasic = $this->domDocument->createElementNS("KaseyaWS","GetRoles",null);
 
         $elementReq = $this->domDocument->createElement("req");
 
@@ -26,11 +31,9 @@ class GetOrgsRequestDOM extends BasicRequestDOM
         $this->domDocument->appendChild($elementBasic);
 
 
-    }
 
-    public function getHeader():string
-    {
-        return 'SOAPAction: "KaseyaWS/GetOrgs"';
+
+
     }
 
     /**
@@ -39,6 +42,15 @@ class GetOrgsRequestDOM extends BasicRequestDOM
      */
     public function getClassResponse()
     {
-        return GetOrgsResponseDOM::class;
+        return GetRolesResponse::class;
+    }
+
+    /**
+     * Devuelve el valor del header que va tener la peticion
+     * @return string
+     */
+    public function getHeader(): string
+    {
+        return 'SOAPAction: "KaseyaWS/GetRoles"';
     }
 }

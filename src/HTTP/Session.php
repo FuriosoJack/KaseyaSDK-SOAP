@@ -59,7 +59,7 @@ class Session
         $coredPassword = hash('sha256', $preCoredPassword . $randomKey);
 
         //Se crea el contenido de la peticion
-        $domAuth = new AuthRequestDOM();
+        $domAuth = new AuthRequestDOM("as");
         $domAuth->setAlgorithm("SHA-256");
         $domAuth->setCoredPassword($coredPassword);
         $domAuth->setRandomKey($randomKey);

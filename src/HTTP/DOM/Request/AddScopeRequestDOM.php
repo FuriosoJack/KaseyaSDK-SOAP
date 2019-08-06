@@ -15,10 +15,7 @@ class AddScopeRequestDOM extends BasicRequestDOM
      */
     private $scope;
 
-    /**
-     * @var
-     */
-    private $sessionID;
+
 
     /**
      * AddScopeRequestDOM constructor.
@@ -27,9 +24,8 @@ class AddScopeRequestDOM extends BasicRequestDOM
      */
     public function __construct($scope, $sessionID)
     {
-        parent::__construct();
+        parent::__construct($sessionID);
         $this->scope = $scope;
-        $this->sessionID = $sessionID;
     }
 
 

@@ -41,10 +41,6 @@ class AddOrgRequestDOM extends BasicRequestDOM
      */
     private $orgType;
 
-    /**
-     * @var
-     */
-    private $sessionID;
 
     /**
      * AddOrgRequestDOM constructor.
@@ -58,14 +54,13 @@ class AddOrgRequestDOM extends BasicRequestDOM
      */
     public function __construct($orgRef, $orgName, $defaultDeptName, $defaultMgName, $orgParentRef, $orgType, $sessionID)
     {
-        parent::__construct();
+        parent::__construct($sessionID);
         $this->orgRef = $orgRef;
         $this->orgName = $orgName;
         $this->defaultDeptName = $defaultDeptName;
         $this->defaultMgName = $defaultMgName;
         $this->orgParentRef = $orgParentRef;
         $this->orgType = $orgType;
-        $this->sessionID = $sessionID;
     }
 
 

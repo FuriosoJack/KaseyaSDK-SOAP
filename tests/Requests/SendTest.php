@@ -8,6 +8,7 @@ use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\AddUserToScopeRequestDOM;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\AuthRequestDOM;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\CreateAdminRequestDOM;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\GetOrgsRequestDOM;
+use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\GetRolesRequest;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\Request;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\Session;
 use FuriosoJack\KaseyaSDKSOAP\Tests\TestCase;
@@ -137,6 +138,22 @@ class SendTest extends TestCase
             $addrolRolUser = new AddUserToRoleRequestDOM("furiosojack2","CORPORATE",$session->getAuthResponseDOM()->getSessionID());
 
             $response = $session->request($addrolRolUser);
+
+            $this->assertTrue($response->isSuccess());
+        }
+
+    }
+
+    public function testGetRoles()
+    {
+        $credential = new Credentials(getenv("USERNAME_SERVER"),getenv("PASSWORD_SERVER"));
+        $session = new Session($credential,getenv('URL_SERVER'));
+
+        if($session->auth()){
+
+            $getRoles = new GetRolesRequest($session->getAuthResponseDOM()->getSessionID());
+
+            $response = $session->request($getRoles);
 
             $this->assertTrue($response->isSuccess());
         }

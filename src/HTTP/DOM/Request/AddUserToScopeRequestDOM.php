@@ -20,10 +20,6 @@ class AddUserToScopeRequestDOM extends BasicRequestDOM
      */
     private $scopeID;
 
-    /**
-     * @var
-     */
-    private $sessionID;
 
     /**
      * AddUserToScopeRequestDOM constructor.
@@ -33,10 +29,9 @@ class AddUserToScopeRequestDOM extends BasicRequestDOM
      */
     public function __construct($userName, $scopeID, $sessionID)
     {
-        parent::__construct();
+        parent::__construct($sessionID);
         $this->userName = $userName;
         $this->scopeID = $scopeID;
-        $this->sessionID = $sessionID;
     }
 
 

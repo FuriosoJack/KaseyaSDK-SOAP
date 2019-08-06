@@ -21,10 +21,7 @@ class AddOrgToScopeRequestDOM extends BasicRequestDOM
      */
     private $scopeID;
 
-    /**
-     * @var
-     */
-    private $sessionID;
+
 
     /**
      * AddOrgToScopeRequestDOM constructor.
@@ -34,10 +31,10 @@ class AddOrgToScopeRequestDOM extends BasicRequestDOM
      */
     public function __construct($companyID, $scopeID, $sessionID)
     {
-        parent::__construct();
+        parent::__construct($sessionID);
         $this->companyID = $companyID;
         $this->scopeID = $scopeID;
-        $this->sessionID = $sessionID;
+
     }
 
 

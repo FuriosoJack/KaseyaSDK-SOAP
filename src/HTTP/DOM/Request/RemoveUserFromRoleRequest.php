@@ -22,10 +22,6 @@ class RemoveUserFromRoleRequest extends BasicRequestDOM
      */
     private $adminName;
 
-    /**
-     * @var
-     */
-    private $sessionID;
 
     /**
      * @var
@@ -41,10 +37,9 @@ class RemoveUserFromRoleRequest extends BasicRequestDOM
      */
     public function __construct($roleName, $adminName, $sessionID, $browserIP)
     {
-        parent::__construct();
+        parent::__construct($sessionID);
         $this->roleName = $roleName;
         $this->adminName = $adminName;
-        $this->sessionID = $sessionID;
         $this->browserIP = $browserIP;
     }
 

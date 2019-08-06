@@ -23,10 +23,6 @@ class EnableAdminRequest extends BasicRequestDOM
      */
     private $browserIP;
 
-    /**
-     * @var
-     */
-    private $sessionID;
 
     /**
      * DisableAdminRequest constructor.
@@ -36,10 +32,10 @@ class EnableAdminRequest extends BasicRequestDOM
      */
     public function __construct($adminName, $browserIP, $sessionID)
     {
-        parent::__construct();
+        parent::__construct($sessionID);
         $this->adminName = $adminName;
         $this->browserIP = $browserIP;
-        $this->sessionID = $sessionID;
+
     }
 
     /**

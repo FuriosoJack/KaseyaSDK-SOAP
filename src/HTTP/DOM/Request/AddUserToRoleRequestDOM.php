@@ -21,10 +21,7 @@ class AddUserToRoleRequestDOM extends BasicRequestDOM
      */
     private $roleID;
 
-    /**
-     * @var
-     */
-    private $sessionID;
+
 
     /**
      * AddUserToRoleRequestDOM constructor.
@@ -34,10 +31,9 @@ class AddUserToRoleRequestDOM extends BasicRequestDOM
      */
     public function __construct($userName, $roleID, $sessionID)
     {
-        parent::__construct();
+        parent::__construct($sessionID);
         $this->userName = $userName;
         $this->roleID = $roleID;
-        $this->sessionID = $sessionID;
     }
 
 

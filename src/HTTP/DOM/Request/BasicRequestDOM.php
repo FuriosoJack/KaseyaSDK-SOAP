@@ -15,12 +15,19 @@ abstract class BasicRequestDOM
      */
     protected $domDocument;
 
+    /**
+     * @var
+     */
+    protected $sessionID;
+
 
     /**
      * BasicRequestDOM constructor.
+     * @param $sessionID
      */
-    public function __construct()
+    public function __construct($sessionID = null)
     {
+        $this->sessionID = $sessionID;
         $this->domDocument = new \DOMDocument();
     }
 
