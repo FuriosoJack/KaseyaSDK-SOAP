@@ -9,6 +9,7 @@ use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\AuthRequestDOM;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\BodyRequestDOM;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\CreateAdminRequestDOM;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\GetOrgsRequestDOM;
+use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\RemoveUserFromRoleRequest;
 use FuriosoJack\KaseyaSDKSOAP\Tests\TestCase;
 
 /**
@@ -67,14 +68,15 @@ class DomTest extends TestCase
     {
         $addRol = new AddUserToRoleRequestDOM("USERNAME","ROLID","SESSSION");
         $addRol->compose();
-
         $this->assertIsString((string)$addRol);
-
-
-
-
     }
 
+    public function testRemoveUsertoRol()
+    {
+        $removeUser = new RemoveUserFromRoleRequest("USERNAME","ROLID","SESSSION",null);
+        $removeUser->compose();
+        $this->assertIsString((string)$removeUser);
+    }
 
 
 }

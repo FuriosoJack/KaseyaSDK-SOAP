@@ -50,7 +50,7 @@ class RemoveUserFromRoleRequest extends BasicRequestDOM
      */
     public function compose()
     {
-        $elementBase = $this->domDocument->createElementNS("KaseyaWS","RemoveUserFromRole ",null);
+        $elementBase = $this->domDocument->createElementNS("KaseyaWS","RemoveUserFromRole",null);
         $elementREQ = $this->domDocument->createElement("req");
         $elementRole = $this->domDocument->createElement("RoleName",$this->roleName);
         $elementAdminName = $this->domDocument->createElement("AdminName",$this->adminName);
