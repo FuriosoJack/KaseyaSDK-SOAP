@@ -9,6 +9,7 @@ use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\AuthRequestDOM;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\CreateAdminRequestDOM;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\GetOrgsRequestDOM;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\GetRolesRequest;
+use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Response\GetRolesResponse;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\Request;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\Session;
 use FuriosoJack\KaseyaSDKSOAP\Tests\TestCase;
@@ -156,6 +157,12 @@ class SendTest extends TestCase
             $response = $session->request($getRoles);
 
             $this->assertTrue($response->isSuccess());
+
+
+            $responseGetRoles = $response->getResponseDOM();
+
+            $this->assertInstanceOf(GetRolesResponse::class,$responseGetRoles,"La clase de instancai no es correcta");
+
         }
 
     }
