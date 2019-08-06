@@ -54,12 +54,17 @@ class RemoveUserFromRoleRequest extends BasicRequestDOM
         $elementREQ = $this->domDocument->createElement("req");
         $elementRole = $this->domDocument->createElement("RoleName",$this->roleName);
         $elementAdminName = $this->domDocument->createElement("AdminName",$this->adminName);
-        $elementBrowser = $this->domDocument->createElement("BrowserIP",$this->browserIP);
-        $elementSessionID = $this->domDocument->createElement("SessionID",$this->browserIP);
+        $elementSessionID = $this->domDocument->createElement("SessionID",$this->sessionID);
+
+        if(null != $this->browserIP){
+            $elementBrowser = $this->domDocument->createElement("BrowserIP",$this->browserIP);
+            $elementREQ->appendChild($elementBrowser);
+        }
+
 
         $elementREQ->appendChild($elementRole);
         $elementREQ->appendChild($elementAdminName);
-        $elementREQ->appendChild($elementBrowser);
+
         $elementREQ->appendChild($elementSessionID);
         $elementBase->appendChild($elementREQ);
         $this->domDocument->appendChild($elementBase);

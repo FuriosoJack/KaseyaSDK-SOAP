@@ -9,6 +9,7 @@ use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\AuthRequestDOM;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\CreateAdminRequestDOM;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\GetOrgsRequestDOM;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\GetRolesRequest;
+use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Request\RemoveUserFromRoleRequest;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\DOM\Response\GetRolesResponse;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\Request;
 use FuriosoJack\KaseyaSDKSOAP\HTTP\Session;
@@ -148,7 +149,9 @@ class SendTest extends TestCase
     public function testGetRoles()
     {
         $credential = new Credentials(getenv("USERNAME_SERVER"),getenv("PASSWORD_SERVER"));
+
         $session = new Session($credential,getenv('URL_SERVER'));
+
 
         if($session->auth()){
 
@@ -160,12 +163,38 @@ class SendTest extends TestCase
 
 
             $responseGetRoles = $response->getResponseDOM();
-
             $this->assertInstanceOf(GetRolesResponse::class,$responseGetRoles,"La clase de instancai no es correcta");
 
+        }else{
+            $this->assertTrue(false);
         }
 
     }
+
+    public function testRemoveRoles()
+    {
+        $credential = new Credentials(getenv("USERNAME_SERVER"),getenv("PASSWORD_SERVER"));
+
+        $session = new Session($credential,getenv('URL_SERVER'));
+
+
+        if($session->auth()){
+
+
+            $responseDom = $session->getAuthResponseDOM();
+
+            $remove = new RemoveUserFromRoleRequest("CORPORATE",getenv("USERNAME_SERVER"),$responseDom->getSessionID(),null);
+
+            $response = $session->request($remove);
+
+            $this->assertTrue($response->isSuccess());
+
+        }else{
+            $this->assertTrue(false);
+        }
+
+    }
+
 
 
 
